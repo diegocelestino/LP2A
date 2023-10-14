@@ -1,6 +1,7 @@
 package com.exservlet.hello;
 
 import com.exservlet.models.Contato;
+import com.exservlet.models.Contatos;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 @WebServlet("/adicionaContato")
@@ -47,11 +49,13 @@ public class AdicionaContatoServlet extends HttpServlet {
         contato.setEmail(email);
         contato.setDataNascimento(dataNascimento);
 
-        Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
+        Map<String, Object> concurrentHashMap = new ConcurrentHashMap<>();
         concurrentHashMap.put("nome", contato.getNome());
         concurrentHashMap.put("endereco", contato.getEndereco());
         concurrentHashMap.put("email", contato.getEmail());
-        concurrentHashMap.put("dataNascimento", contato.getDataNascimento().toString());
+        concurrentHashMap.put("dataNascimento", contato.getDataNascimento());
+
+        Contatos.contatos.add(concurrentHashMap);
 
         out.println("<html>");
         out.println("<body>");

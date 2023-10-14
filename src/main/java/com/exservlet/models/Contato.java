@@ -3,7 +3,6 @@ package com.exservlet.models;
 import java.util.Calendar;
 
 public class Contato {
-
     private Long id;
     private String nome;
     private String email;
